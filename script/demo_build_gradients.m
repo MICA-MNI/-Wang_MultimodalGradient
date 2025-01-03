@@ -24,8 +24,8 @@ FWHM=3; % smooth setting
 HCList = readtable('YOUR SUBJECT LIST'); % your custom sublist, e.g. "sub-PNC001 sub-PNC002 sub-PNC003" 
 HCList=HCList.ID;
 % Load fsLR-5k surface, parcellation, and mask
-load('/micaopen/gradient_profiles/data/fsLR_5k_YWNE.mat');
-load('/micaopen/gradient_profiles/data/colormaps/vik.mat')
+load('/Wang_MultimodalGradient/data/fsLR_5k_YWNE.mat');
+load('/Wang_MultimodalGradient/data/colormaps/vik.mat')
 c69_10k = struct('coord',coord,'tri',tri);
 [surf_l2, surf_r2] = split_surfaces(c69_10k);
 % settings for gradients estimate
