@@ -14,41 +14,41 @@ num_parcel = 228; % number of regions in Julich-Brain Atlas
 num_vertex = 9684; % number of verties on fs-LR_5k surface
 
 % load fsLR-32k surface 
-load('/micaopen/gradient_profiles/data/fsaverage.midthickness_mni_32k_fs_LR.mat');
+load('/Wang_MultimodalGradient/data/fsaverage.midthickness_mni_32k_fs_LR.mat');
 C69 = G; clear G;
 % load fsLR-5k surface 
-load('/micaopen/gradient_profiles/data/fsLR_5k_YWNE.mat');
+load('/Wang_MultimodalGradient/data/fsLR_5k_YWNE.mat');
 C69_10k = struct('coord', coord, 'tri', int32(tri));
 mask_crtx = mask; % mask of the fsLR-5k surface
 [surf_l, surf_r] = split_surfaces(C69_10k); % the fsLR-5k surface
 % pmap of the Julich-Brain on fsLR-32k
-load('/micaopen/gradient_profiles/data/pmap_conte69_new.mat');
+load('/Wang_MultimodalGradient/data/pmap_conte69_new.mat');
 pmap_c69     = pmap_conte69;
 % pmap of the Julich-Brain on fsLR-5k
 cc = zeros(4842,114);
-aa = gifti('/micaopen/gradient_profiles/data/pmaps_fsLR_5k_L.func.gii');
+aa = gifti('/Wang_MultimodalGradient/data/pmaps_fsLR_5k_L.func.gii');
 aa = aa.cdata;
 pmap_lh = [aa,cc];
-aa2=gifti('/micaopen/gradient_profiles/data/pmaps_fsLR_5k_R.func.gii');
+aa2=gifti('/Wang_MultimodalGradient/data/pmaps_fsLR_5k_R.func.gii');
 aa2=aa2.cdata;
 pmap_rh=[cc,aa2];
 pmap_10k  = [pmap_lh;pmap_rh]';
 
 % load parcellation of Julich-Brain atlas
-load('/micaopen/gradient_profiles/data/label_JUB.mat')
+load('/Wang_MultimodalGradient/data/label_JUB.mat')
 label_parcel228 = label_parcel228;
 
 % load gradients
-load('/micaopen/gradient_profiles/data/FCGS_10subjs_sesaverage_FWHM3.mat');
-load('/micaopen/gradient_profiles/data/MPCGS_10subjs_sesaverage_FWHM3_YW.mat');
-load('/micaopen/gradient_profiles/data/SCGS_10subjs_sesaverage_FWHM3.mat');
+load('/Wang_MultimodalGradient/data/FCGS_10subjs_sesaverage_FWHM3.mat');
+load('/Wang_MultimodalGradient/data/MPCGS_10subjs_sesaverage_FWHM3_YW.mat');
+load('/Wang_MultimodalGradient/data/SCGS_10subjs_sesaverage_FWHM3.mat');
 MPCG_group_align = mean(MPCGS_sesaver_all_smooth,3);
 SCG_group_align = mean(SCGS_sesaver_all_smooth,3);
 FCG_group_align = mean(FCGS_sesaver_all_smooth,3);
 
 % visualization of Julich-Brain atlas
-temp_c69_lh = gifti('/micaopen/gradient_profiles/data/fsLR-32k.L.inflated.surf.gii');
-temp_c69_rh = gifti('/micaopen/gradient_profiles/data/fsLR-32k.R.inflated.surf.gii');
+temp_c69_lh = gifti('/Wang_MultimodalGradient/data/fsLR-32k.L.inflated.surf.gii');
+temp_c69_rh = gifti('/Wang_MultimodalGradient/data/fsLR-32k.R.inflated.surf.gii');
 c69_boundry_inflate_lh.vertices = temp_c69_lh.vertices;
 c69_boundry_inflate_lh.faces = temp_c69_lh.faces;
 pmap_thre2 = pmap_c69;
@@ -75,13 +75,13 @@ blue_red=[mycolormap_r',mycolormap_g',mycolormap_b']/255;
 blue_red=round(blue_red*10^4)/10^4;
 red=blue_red(321:640,:);
 blue=flip(blue_red(1:320,:));
-load('/micaopen/gradient_profiles/data/colormaps/vik.mat')
-load('/micaopen/gradient_profiles/data/colormaps/imola.mat')
-load('/micaopen/gradient_profiles/data/colormaps/buda.mat')
-load('/micaopen/gradient_profiles/data/colormaps/batlow.mat')
-load('/micaopen/gradient_profiles/data/colormaps/oslo.mat')
-load('/micaopen/gradient_profiles/data/colormaps/roma.mat')
-load('/micaopen/gradient_profiles/data/colormaps/nuuk.mat')
+load('/Wang_MultimodalGradient/data/colormaps/vik.mat')
+load('/Wang_MultimodalGradient/data/colormaps/imola.mat')
+load('/Wang_MultimodalGradient/data/colormaps/buda.mat')
+load('/Wang_MultimodalGradient/data/colormaps/batlow.mat')
+load('/Wang_MultimodalGradient/data/colormaps/oslo.mat')
+load('/Wang_MultimodalGradient/data/colormaps/roma.mat')
+load('/Wang_MultimodalGradient/data/colormaps/nuuk.mat')
 roma_flip=flip(roma);
 
 %% generation of gradient profiles and inter-areal dissimilarity
@@ -165,7 +165,7 @@ A = plot_hemispheres(Gs,{surf_l, surf_r}, 'labeltext',{'heterogeneity'});
 A.colormaps([0.8 0.8 0.8; blue]);
 
 %%% association between inter-areal dissimilarity and BigBrain g1
-load('/micaopen/gradient_profiles/data/bigbrain_g1_fsLR_5k.mat');
+load('/Wang_MultimodalGradient/data/bigbrain_g1_fsLR_5k.mat');
 bbgs_5k = bbgs_5k;
 bbgs_parcel = zeros(size(pmap_10k,1),1);
 bbgs_midw = zeros(size(mask_crtx,1),1);
@@ -190,7 +190,7 @@ set(gca,'FontSize',18);
 set(gca,'Linewidth',1.5);
 
 % distribution in mesulam
-load('/micaopen/gradient_profiles/data/mesulam_fsLR_5k.mat');
+load('/Wang_MultimodalGradient/data/mesulam_fsLR_5k.mat');
 label_mesulam=mesulam_fsLR_5k';
 label_mesulam_parc=zeros(1,num_parcel);
 for ii=1:num_parcel
@@ -250,13 +250,13 @@ t_mesulam(4,2)=tm5.tstat;
 t_mesulam(4,3)=tm6.tstat;
 
 % spin test
-sphere_a=gifti('/micaopen/gradient_profiles/data/fsLR_5k-regular.L.sphere.surf.gii');
-sphere_b=gifti('/micaopen/gradient_profiles/data/fsLR_5k-regular.R.sphere.surf.gii');
+sphere_a=gifti('/Wang_MultimodalGradient/data/fsLR_5k-regular.L.sphere.surf.gii');
+sphere_b=gifti('/Wang_MultimodalGradient/data/fsLR_5k-regular.R.sphere.surf.gii');
 sphere_5k_lh.tri=sphere_a.faces;
 sphere_5k_lh.coord=sphere_a.vertices';
 sphere_5k_rh.tri=sphere_b.faces;
 sphere_5k_rh.coord=sphere_b.vertices';
-load('/micaopen/gradient_profiles/data/mesulam_fsLR_32k.mat')
+load('/Wang_MultimodalGradient/data/mesulam_fsLR_32k.mat')
 n_permutations = 1000;
 y_rand = spin_permutations({inter_dissimilarity_5k(1:4842),inter_dissimilarity_5k(4843:9684)}, ...
                   {sphere_5k_lh,sphere_5k_rh}, n_permutations,'random_state',0);
@@ -342,7 +342,7 @@ r_rand_bbg1 = corr(lh_c69,bbg1_rotated, 'rows','pairwise','type','spearman');
 %% association with cross-task diversity
 % global variability
 num_task = 9;
-load('/micaopen/gradient_profiles/data/diversityariability_global_9tasks_cosine_distance.mat')%diversity_cosine
+load('/Wang_MultimodalGradient/data/diversityariability_global_9tasks_cosine_distance.mat')%diversity_cosine
 
 diversity_global(isnan(diversity_global))=0;
 diversity_global_parcel = zeros(num_parcel,num_task);
