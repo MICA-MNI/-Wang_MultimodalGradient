@@ -300,7 +300,7 @@ end
 A=plot_hemispheres(distance_intra_parcel,{surf_l, surf_r},'parcellation', label_parcel228', 'labeltext',{'LH parcel'});
 A.colormaps([0.8 0.8 0.8; buda]);
 
-% associaton with bigbrain g1 g2
+% associaton with bigbrain g1
 [r_LH_BBGS,p_LH_BBGS]=corr(distance_intra_parcel,bbgs_flip,'type','Spearman');
 figure;scatter(distance_intra_parcel,bbgs_flip(:,1),150,'MarkerEdgeColor',[1 1 1],...
               'MarkerFaceColor',[0 0 0],'LineWidth',1.5);
